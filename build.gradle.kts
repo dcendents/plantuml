@@ -1,7 +1,7 @@
 plugins {
   java
   `maven-publish`
-  signing
+  //signing
 }
 
 repositories {
@@ -101,7 +101,10 @@ tasks.test {
   testLogging.showStandardStreams = true
 }
 
+/*
 signing {
   useGpgCmd()
   sign(publishing.publications["maven"])
 }
+*/
+
