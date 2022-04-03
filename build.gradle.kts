@@ -9,7 +9,7 @@ val javacRelease = (project.findProperty("javacRelease") ?: "8") as String
 plugins {
 	java
 	`maven-publish`
-	signing
+        //signing
 }
 
 group = "net.sourceforge.plantuml"
@@ -156,7 +156,7 @@ val pdfJar by tasks.registering(Jar::class) {
 	with(tasks.jar.get())
 	archiveAppendix.set("pdf")
 }
-
+/*
 signing {
 	if (hasProperty("signing.gnupg.keyName") && hasProperty("signing.gnupg.passphrase")) {
 		useGpgCmd()
@@ -170,3 +170,5 @@ signing {
 		sign(closureOf<SignOperation> { sign(pdfJar.get()) })
 	}
 }
+*/
+

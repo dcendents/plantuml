@@ -43,6 +43,10 @@ import java.util.StringTokenizer;
 import net.sourceforge.plantuml.BackSlash;
 import net.sourceforge.plantuml.ISkinSimple;
 import net.sourceforge.plantuml.LineBreakStrategy;
+import net.sourceforge.plantuml.StringUtils;
+import net.sourceforge.plantuml.command.regex.Matcher2;
+import net.sourceforge.plantuml.command.regex.MyPattern;
+import net.sourceforge.plantuml.command.regex.Pattern2;
 import net.sourceforge.plantuml.creole.CreoleContext;
 import net.sourceforge.plantuml.creole.CreoleMode;
 import net.sourceforge.plantuml.creole.Sheet;
@@ -67,7 +71,7 @@ public class StripeTable implements Stripe {
 	final private ISkinSimple skinParam;
 	final private AtomTable table;
 	final private Atom marged;
-	final private StripeStyle stripeStyle = new StripeStyle(StripeStyleType.NORMAL, 0, '\0');
+	//final private StripeStyle stripeStyle = new StripeStyle(StripeStyleType.NORMAL, 0, '\0');
 
 	public StripeTable(FontConfiguration fontConfiguration, ISkinSimple skinParam, String line) {
 		this.skinParam = skinParam;
@@ -144,6 +148,10 @@ public class StripeTable implements Stripe {
 			final List<String> lines = getWithNewlinesInternal(v);
 			final List<StripeSimple> cells = new ArrayList<>();
 			for (String s : lines) {
+				CreoleStripeSimpleParser creoleStripeSimpleParser = new CreoleStripeSimpleParser(s, null, fontConfiguration, skinParam, CreoleMode.FULL);
+				StripeStyle stripeStyle = creoleStripeSimpleParser.style;
+				s = creoleStripeSimpleParser.line;
+				
 				final StripeSimple cell = new StripeSimple(getFontConfiguration(mode), stripeStyle, new CreoleContext(),
 						skinParam, CreoleMode.FULL);
 				if (s.startsWith("<r>")) {
