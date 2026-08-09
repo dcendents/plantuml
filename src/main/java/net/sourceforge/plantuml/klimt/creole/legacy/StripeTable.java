@@ -71,7 +71,7 @@ public class StripeTable implements Stripe {
 	final private ISkinSimple skinParam;
 	final private AtomTable table;
 	final private Atom marged;
-	final private StripeStyle stripeStyle = new StripeStyle(StripeStyleType.NORMAL, 0, '\0');
+	//final private StripeStyle stripeStyle = new StripeStyle(StripeStyleType.NORMAL, 0, '\0');
 
 	public StripeTable(FontConfiguration fontConfiguration, ISkinSimple skinParam, String line) {
 		this.skinParam = skinParam;
@@ -149,6 +149,10 @@ public class StripeTable implements Stripe {
 			final List<String> lines = getWithNewlinesInternal(v);
 			final List<StripeSimple> cells = new ArrayList<>();
 			for (String s : lines) {
+				CreoleStripeSimpleParser creoleStripeSimpleParser = new CreoleStripeSimpleParser(s, null, fontConfiguration, skinParam, CreoleMode.FULL);
+				StripeStyle stripeStyle = creoleStripeSimpleParser.style;
+				s = creoleStripeSimpleParser.line;
+				
 				final StripeSimple cell = new StripeSimple(getFontConfiguration(mode), stripeStyle, new CreoleContext(),
 						skinParam, CreoleMode.FULL);
 				if (s.startsWith("<r>")) {
